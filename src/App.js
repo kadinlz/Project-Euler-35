@@ -7,12 +7,15 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			num: 1000000000,
+			num: 10,
+			primes: 0,
 		};
 	}
 	handleChange = e => {
+		var input = e.target.value;
 		this.setState({
-			num: e.target.value,
+			num: input,
+			primes: input * 2,
 		});
 	};
 	render() {
@@ -36,6 +39,7 @@ class App extends Component {
 						value={this.state.num}
 						onChange={this.handleChange}
 					/>
+					<p className="result">{this.state.primes}</p>
 				</div>
 			</div>
 		);
