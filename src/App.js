@@ -13,6 +13,7 @@ class App extends Component {
 	}
 	handleChange = e => {
 		var input = e.target.value;
+		for (var i = 2; i < input; i += 2) {}
 		this.setState({
 			num: input,
 			primes: input * 2,
