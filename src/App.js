@@ -11,12 +11,32 @@ class App extends Component {
 			primes: 0,
 		};
 	}
+	isCircular() {}
 	handleChange = e => {
 		var input = e.target.value;
-		for (var i = 2; i < input; i += 2) {}
+		var primes = 0;
+		//Loop through each odd number below input
+		if (input > 2) {
+			primes += 1;
+		}
+		for (var i = 3; i < input; i += 2) {
+			var root = Math.sqrt(i);
+			var prime = true;
+			// console.log(root);
+			//Loop through each number below root
+			for (var j = 2; j <= root; j++) {
+				if (i % j === 0) {
+					prime = false;
+					break;
+				}
+			}
+			if (prime === true) {
+				primes += 1;
+			}
+		}
 		this.setState({
 			num: input,
-			primes: input * 2,
+			primes: primes,
 		});
 	};
 	render() {
