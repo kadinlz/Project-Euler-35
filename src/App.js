@@ -22,7 +22,6 @@ class App extends Component {
 		for (var i = 3; i < input; i += 2) {
 			var root = Math.sqrt(i);
 			var prime = true;
-			// console.log(root);
 			//Loop through each number below root
 			for (var j = 2; j <= root; j++) {
 				if (i % j === 0) {
