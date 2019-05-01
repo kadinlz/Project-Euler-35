@@ -7,7 +7,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			num: 10,
+			num: null,
 			circularPrimes: 0,
 		};
 	}
@@ -91,7 +91,7 @@ class App extends Component {
 						Project Euler Problem <span>35</span>
 					</p>
 					<p className="description">
-						How many circular circularPrimes
+						How many circular primes
 						<a className="info" target=" " href="https://projecteuler.net/problem=35">
 							<FaInfoCircle />
 						</a>
