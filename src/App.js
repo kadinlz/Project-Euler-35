@@ -8,7 +8,7 @@ class App extends Component {
 		super(props);
 		this.state = {
 			num: 10,
-			primes: 0,
+			circularPrimes: 0,
 		};
 	}
 	isPrime(number) {
@@ -48,8 +48,10 @@ class App extends Component {
 			if ([0, 2, 4, 5, 6, 8].includes(lastDigit)) {
 				return false;
 			}
+			//Rotate number
 			var firstDigits = Math.floor(prime / 10);
 			number = lastDigit * 10 ** (length - 1) + firstDigits;
+			//If number is not prime, end function
 			if (!this.isPrime(number)) {
 				return false;
 			}
@@ -59,21 +61,26 @@ class App extends Component {
 	}
 	handleChange = e => {
 		var input = e.target.value;
-		var primes = 0;
-		//Loop through each odd number below input
+		var circularPrimes = 0;
+
+		//Handle input of 2
 		if (input > 2) {
-			primes += 1;
+			circularPrimes += 1;
 		}
+
+		//Loop through each odd number below input
 		for (var i = 3; i < input; i += 2) {
 			if (this.isPrime(i)) {
 				if (this.isCircular(i)) {
-					primes += 1;
+					circularPrimes += 1;
 				}
 			}
 		}
+
+		//Update result when finished
 		this.setState({
 			num: input,
-			primes: primes,
+			circularPrimes: circularPrimes,
 		});
 	};
 	render() {
@@ -84,7 +91,7 @@ class App extends Component {
 						Project Euler Problem <span>35</span>
 					</p>
 					<p className="description">
-						How many circular primes
+						How many circular circularPrimes
 						<a className="info" target=" " href="https://projecteuler.net/problem=35">
 							<FaInfoCircle />
 						</a>
@@ -97,7 +104,7 @@ class App extends Component {
 						value={this.state.num}
 						onChange={this.handleChange}
 					/>
-					<p className="result">{this.state.primes}</p>
+					<p className="result">{this.state.circularPrimes}</p>
 				</div>
 			</div>
 		);
