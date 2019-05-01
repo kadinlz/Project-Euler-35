@@ -11,7 +11,52 @@ class App extends Component {
 			primes: 0,
 		};
 	}
-	isCircular() {}
+	isPrime(number) {
+		//Special cases & single digits
+		if (number === 1) {
+			return false;
+		} else if ([2, 3, 5, 7].includes(number)) {
+			return true;
+		}
+
+		var lastDigit = number % 10;
+		//If last digit is even, 5, or 0, number is not prime, so return false
+		if ([0, 2, 4, 5, 6, 8].includes(lastDigit)) {
+			return false;
+		}
+
+		for (var i = 2; i <= Math.sqrt(number); i++) {
+			if (number % i === 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	isCircular(prime) {
+		//Handle single digits
+		if ([2, 3, 5, 7].includes(prime)) {
+			return true;
+		}
+
+		var number = prime;
+		var length = number.toString().length;
+
+		//Rotate the number once for every digit
+		for (var i = 0; i < length; i++) {
+			var lastDigit = prime % 10;
+			//If last digit is even, 5, or 0, number is not prime, so return false
+			if ([0, 2, 4, 5, 6, 8].includes(lastDigit)) {
+				return false;
+			}
+			var firstDigits = Math.floor(prime / 10);
+			number = lastDigit * 10 ** (length - 1) + firstDigits;
+			if (!this.isPrime(number)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 	handleChange = e => {
 		var input = e.target.value;
 		var primes = 0;
@@ -20,17 +65,10 @@ class App extends Component {
 			primes += 1;
 		}
 		for (var i = 3; i < input; i += 2) {
-			var root = Math.sqrt(i);
-			var prime = true;
-			//Loop through each number below root
-			for (var j = 2; j <= root; j++) {
-				if (i % j === 0) {
-					prime = false;
-					break;
+			if (this.isPrime(i)) {
+				if (this.isCircular(i)) {
+					primes += 1;
 				}
-			}
-			if (prime === true) {
-				primes += 1;
 			}
 		}
 		this.setState({
